@@ -29,8 +29,8 @@ scheduler/src/main/resources/application.properties
 
 to
 
-;spring.datasource.url=jdbc:h2:file:~/demo;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
-;spring.jpa.hibernate.ddl-auto = update
+spring.datasource.url=jdbc:h2:file:~/demo;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
+spring.jpa.hibernate.ddl-auto = update
 
 # DB URL 
 
