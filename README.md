@@ -14,7 +14,7 @@ must be 15 minutes, or 1 hour in duration.
 
 # Running schedular #
 
-java -jar build/libs/schedular-0.0.1-SNAPSHOT.jar
+java -jar build/libs/scheduler-0.0.1-SNAPSHOT.jar
 
 
 # Making the DB persistant 
