@@ -21,10 +21,9 @@ public class EventServiceImpl implements EventService {
         return eventRepository.save(eventDAO);
     }
 
-    public boolean remove(String id) {
+    public void remove(String id) {
         EventDAO eventDAO = eventRepository.findById( Long.parseLong(id) );
         eventRepository.delete(eventDAO); 
-        return true;
     }
 
     public boolean hasTimeOverlap(EventDAO eventDAO)  {
@@ -35,11 +34,11 @@ public class EventServiceImpl implements EventService {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(eventDAO.getStart().getTime());
-        if(eventDAO.getDuration() == 15) {
+        if(eventDAO.getDuration() == 15) 
             calendar.add(Calendar.MINUTE, 15);
-        } else {
+        else 
             calendar.add(Calendar.MINUTE, 60);
-        }
+
         eventDAO.setEnd(new Timestamp(calendar.getTime().getTime() )); 
         return eventDAO;
     }
@@ -50,9 +49,8 @@ public class EventServiceImpl implements EventService {
         calendar.setTimeInMillis(end.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        if(hour >= 17 && !( hour == 17 && minute ==0)) {
+        if(hour >= 17 && !( hour == 17 && minute ==0)) 
             return false;
-        } 
         return true;
     }
 
@@ -61,10 +59,8 @@ public class EventServiceImpl implements EventService {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(start.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-        if(hour  < 8) {
+        if(hour  < 8)
             return false;
-        }
         return true;
     }
 }

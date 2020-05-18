@@ -8,7 +8,7 @@ public class EventDAO {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    
+
     public Long getId() {
         return id;
     }
@@ -60,7 +60,6 @@ public class EventDAO {
     private int duration;
 
     public int getDuration() {
-
         return duration;
     }
 
