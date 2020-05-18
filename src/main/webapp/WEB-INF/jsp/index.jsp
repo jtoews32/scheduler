@@ -29,7 +29,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
       return new Date(date.toString().split('GMT')[0]+' UTC').toISOString().replace(".000Z", "");
     }
 
-    var prettyTimeText = function (date) {
+    var prettyTimeText = function(date) {
       let options = {
         weekday: 'long',
         year: 'numeric',
@@ -41,10 +41,10 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
       return "15 minute or 1 hour appoints slots offered, " +  date.toLocaleString('en-us', options) ; 
     }
 
-    var showAppointments = function ( calendar ) {
+    var showAppointments = function (calendar) {
       axios.get('http://localhost:8080/events')
       .then(function (response) {
-        response.data.forEach( function ( event ) { 
+        response.data.forEach( function(event) { 
           calendar.addEvent({
             id: event.id,
             resourceId: 'resource', 
@@ -65,7 +65,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         title: name, 
         duration: duration
       })
-      .then(function (response) { 
+      .then(function(response) { 
         calendar.addEvent({
           id: response.data.id,
           resourceId: 'resource', 
@@ -79,18 +79,18 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 
     var unbookAppointment = function(calendar, id) {
       axios.delete('http://localhost:8080/events/' + id)
-      .then(function (response) {
+      .then(function(response) {
         var event = calendar.getEventById(id);
         event.remove();
         calendar.render(); 
       });
     }
 
-    var calendarEl = document.getElementById('calendar');
+    var calendarDiv = document.getElementById('calendar');
     const calGMT = Date().toString().split('GMT')[0]+' UTC';
     const calDefault = (new Date(calGMT).toISOString().split('T')[0]);
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarDiv, {
       plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
       defaultView: 'resourceTimeGridDay',
       defaultDate: calDefault,
@@ -117,7 +117,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
       events: [],
 
       eventClick: function(info) {
-        $("#removeTextBody").text( "\"" + info.event.title + "\" will be removed from the calendar");
+        $("#removeTextBody").text("\"" + info.event.title + "\" will be removed from the calendar");
         $("#removeAppointmentModalButton").data("id", info.event.id); 
         $("#removeAppointmentModalButton").click();
       },
@@ -129,7 +129,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
   
         $("#eventNameInput").val('');
         $("#scheduleTextBody").text(prettyTimeText(arg["date"]));
-        $("#eventNameInput" ).removeClass("alert alert-danger");
+        $("#eventNameInput").removeClass("alert alert-danger");
         $("#bookAppointmentModalButton").data("start", getStartTime(arg["date"])); 
         $("#bookAppointmentModalButton").click();
       }
@@ -138,26 +138,26 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
     showAppointments(calendar);
     calendar.render();
 
-    $("#book15Button").on("click", function(){
+    $("#book15Button").on("click", function() {
       if( $("#eventNameInput").val().length === 0) {
         $("#eventNameInput").addClass("alert alert-danger");
         return;
       }
-      bookAppointment(calendar, $("#bookAppointmentModalButton" ).data("start") , $("#eventNameInput").val(), 15);
+      bookAppointment(calendar, $("#bookAppointmentModalButton").data("start") , $("#eventNameInput").val(), 15);
       $("#closeScheduleModalButton").click();
     });
 
-    $("#book60Button").on("click", function(){
+    $("#book60Button").on("click", function() {
       if($("#eventNameInput").val().length === 0) {
-        $("#eventNameInput").addClass( "alert alert-danger" );
+        $("#eventNameInput").addClass( "alert alert-danger");
         return;
       }
 
-      bookAppointment(calendar,$("#bookAppointmentModalButton").data("start") , $("#eventNameInput").val(), 60);
+      bookAppointment(calendar,$("#bookAppointmentModalButton").data("start"), $("#eventNameInput").val(), 60);
       $("#closeScheduleModalButton").click();
     });
 
-    $("#removeAppointmentButton").on("click", function(){
+    $("#removeAppointmentButton").on("click", function() {
       unbookAppointment( calendar,$( "#removeAppointmentModalButton").data("id"));
       $("#closeDeleteModalButton").click();
     });
