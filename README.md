@@ -31,7 +31,7 @@ See configuration below for in memory option.
 ```
 # How to make  DB persistant 
 
-While typically an in-memory database, H2, can also be used in persistance mode.
+While typically an in-memory database, H2 can be used in persistance mode.
 To switch between in-memory and persistance mode change the below. Remove ";", or add ";".
 
 scheduler/src/main/resources/application.properties
@@ -52,8 +52,8 @@ password: password
 
 # Local environment settings of the original build system #
 
-If for some reason it won't work because of an extreme difference this app was created, and tested using Firefox
-on a Linux machine with the following the versions of software.
+The frontend was tested using Firefox.
+The serverside was built on a Linux machine using the following software.
 
 ## Java
 ```
