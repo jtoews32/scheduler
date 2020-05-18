@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
 public class SchedularApplication {
-	private static final Logger log = LoggerFactory.getLogger(SchedularApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(SchedularApplication.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(SchedularApplication.class, args);
-	}
+    public static void main(String[] args) {
+    SpringApplication.run(SchedularApplication.class, args);
+    }
 }
 
 

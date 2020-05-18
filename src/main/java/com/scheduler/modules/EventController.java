@@ -11,32 +11,32 @@ import java.math.BigDecimal;
 
 @RestController
 public class EventController {
-	@Autowired EventService eventService;
+    @Autowired EventService eventService;
 
-	@GetMapping("/events")
-  @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
-  public List<EventDAO> getAllEvents() {
+    @GetMapping("/events")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public List<EventDAO> getAllEvents() {
         return eventService.requestAll()  ;
-  }
+    }
 
-  @PostMapping("/events")
-  @ResponseStatus(HttpStatus.OK)
-  @ResponseBody
-  public EventDAO newEvent(@RequestBody EventDAO newEventDAO) {
-    EventDAO eventDAO = eventService.setEndTime(newEventDAO);
+    @PostMapping("/events")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public EventDAO newEvent(@RequestBody EventDAO newEventDAO) {
+        EventDAO eventDAO = eventService.setEndTime(newEventDAO);
 
- 		if ( !eventService.hasTimeOverlap(eventDAO) && eventService.isEndTimeValid(eventDAO.getEnd() ) && eventService.isStartTimeValid(eventDAO.getStart()) ) {
-  		return eventService.create(eventDAO);
-  	} 
+        if ( !eventService.hasTimeOverlap(eventDAO) && eventService.isEndTimeValid(eventDAO.getEnd() ) && eventService.isStartTimeValid(eventDAO.getStart()) ) {
+          return eventService.create(eventDAO);
+        } 
 
-  	return null;
-  }
+        return null;
+    }
  
-  @DeleteMapping("/events/{id}")
-	public ResponseEntity<?> deleteEvent(@PathVariable String id) {
-		eventService.remove(id);
-  		return ResponseEntity.noContent().build();
-	}
+    @DeleteMapping("/events/{id}")
+    public ResponseEntity<?> deleteEvent(@PathVariable String id) {
+        eventService.remove(id);
+        return ResponseEntity.noContent().build();
+    }
 }
 
