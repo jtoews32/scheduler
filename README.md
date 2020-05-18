@@ -17,6 +17,12 @@ cd scheduler/
 ```
 java -jar build/libs/scheduler-0.0.1-SNAPSHOT.jar
 ```
+# System requirements #
+```
+System must have internet access so webpage can use Java libs.
+Java, and Gradle must be installed.   
+For DB persistence between restarts "~/" must be writable so ~/demo can be written.
+```
 # Viewing the scheduler demo #
 ```
 http://localhost:8080/
@@ -29,6 +35,7 @@ To test in persistance mode change the below. Remove ";".
 
 scheduler/src/main/resources/application.properties
 ```
+;spring.datasource.url=jdbc:h2:file:~/demo;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
 ;spring.jpa.hibernate.ddl-auto = update
 ;spring.h2.console.enabled=true
 ;spring.h2.console.path=/h2-console

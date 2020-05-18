@@ -31,19 +31,17 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 
     var prettyTimeText = function (date) {
     let options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+        weekday: 'long',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
       };
       return "15 minute or 60 minute appoints offered, " +  date.toLocaleString('en-us', options) ; 
     }
 
     var showAppointments = function ( calendar ) {
-
-
       axios.get('http://localhost:8080/events')
       .then(function (response) {
         response.data.forEach( function ( event ) { 
@@ -63,9 +61,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
     }
 
     var bookAppointment = function(calendar, startTime, name, duration) {
-
       axios.post('http://localhost:8080/events', {
-
         resourceId: 'resource', 
         start: startTime, 
         end: "0000-00-00T00:00:00.000+0000", 
@@ -73,9 +69,6 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         duration: duration
       })
       .then(function (response) { 
-
-        console.dir (response);
-
         calendar.addEvent({
           id: response.data.id,
           resourceId: 'resource', 
@@ -87,7 +80,6 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         calendar.render(); 
       })
       .catch(function (error) {
-
       });   
     }
 
@@ -99,7 +91,6 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         calendar.render(); 
       })
       .catch(function (error) {
-
       });   
     }
 
@@ -129,13 +120,9 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         center: 'title',
         right: 'resourceTimeGridDay,timeGridWeek,dayGridMonth'  
       },
-      views: { },
-      resources: [
-        { id: 'resource', title: ' ' },
-      ],
-      events: [
-        //{ id: '3', resourceId: 'b', start: '2020-02-07T12:00:00', end: '2020-02-08T06:00:00', title: 'event 3' },
-      ],
+      views: {},
+      resources: [{ id: 'resource', title: ' ' },],
+      events: [],
 
       eventClick: function(info) {
         $("#removeTextBody").text( "\"" + info.event.title + "\" will be removed from the calendar");
@@ -143,12 +130,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         $("#removeAppointmentModal" ).click();
       },
 
-      select: function(arg) {
-          console.log( 'select', arg.startStr, arg.endStr,arg.resource ? arg.resource.id : '(no resource)');
-      },
-
       dateClick: function(arg ) {
-
         if ( arg.view.type == 'dayGridMonth') {
           return;
         }
@@ -197,21 +179,17 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 
 </script>
 <style>
-
   body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
-
   #calendar {
     max-width: 900px;
     margin: 50px auto;
   }
-
 </style>
-
 </head>
 <body class="bg-transparent">
   <div id='calendar'></div>
@@ -268,9 +246,9 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
   </div>
 </div>
 
-<button id="removeAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button"  data-toggle="modal" data-target="#exampleModal">button</button>
+<button id="removeAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">button</button>
 
-  <button id="bookAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button"  data-toggle="modal" data-target="#scheduleModal"  data-whatever="@mdo">button</button>
+<button id="bookAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#scheduleModal" data-whatever="@mdo">button</button>
 
 </body>
 </html>
