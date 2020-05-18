@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.*;
 
-
 public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
@@ -23,7 +22,6 @@ public class EventServiceImpl implements EventService {
     }
 
     public boolean remove(String id) {
-
         EventDAO eventDAO = eventRepository.findById( Long.parseLong(id) );
         eventRepository.delete(eventDAO); 
         return true;
@@ -34,29 +32,24 @@ public class EventServiceImpl implements EventService {
     }
 
     public EventDAO setEndTime(EventDAO eventDAO) {
-
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(eventDAO.getStart().getTime());
-
         if( eventDAO.getDuration() == 15) {
             calendar.add(Calendar.MINUTE, 15);
         } else {
             calendar.add(Calendar.MINUTE, 60);
         }
-
         eventDAO.setEnd(new Timestamp(calendar.getTime().getTime() )); 
         return eventDAO;
-   }
+    }
 
     public boolean isEndTimeValid(Timestamp end) {
-    
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(end.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-
         if( hour >= 17 && !( hour == 17 && minute ==0 ) ) {
         return false;
         } 
@@ -67,7 +60,6 @@ public class EventServiceImpl implements EventService {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(start.getTime());
-
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         if( hour  < 8) {
