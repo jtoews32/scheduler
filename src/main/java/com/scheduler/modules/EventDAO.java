@@ -14,8 +14,6 @@ public class EventDAO {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Column(name = "ResourceId", nullable = false, insertable = true, updatable = true, length = 150)
     private String resourceId;
     public String getResourceId() {
         return resourceId;
@@ -23,8 +21,6 @@ public class EventDAO {
     public void setResourceId(String resourceId) {
         this.resourceId = resourceId;
     }
-
-    @Column(name = "Start", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
     private Timestamp start;
     public Timestamp getStart() {
         return start;
@@ -32,8 +28,6 @@ public class EventDAO {
     public void setStart(Timestamp start) {
         this.start = start;
     }
-
-    @Column(name = "End", nullable = true, insertable = true, updatable = true, length = 19, precision = 0)
     private Timestamp end;
     public Timestamp getEnd() {
         return end;
@@ -41,8 +35,6 @@ public class EventDAO {
     public void setEnd(Timestamp end) {
         this.end = end;
     }
-
-    @Column(name = "Title", nullable = true, insertable = true, updatable = true, length = 150)
     private String title;
     public String getTitle() {
         return title;
@@ -50,8 +42,6 @@ public class EventDAO {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    @Column(name = "Duration", insertable = true, updatable = true)
     private int duration;
     public int getDuration() {
 
@@ -60,7 +50,6 @@ public class EventDAO {
     public void setDuration(int duration) {
         this.duration = duration;
     }
-
     @Override
     public String toString() {
         return "EventDAO [id=" + id + ", resourceId=" + resourceId + ", start=" + start + ", end=" + end + ", title="

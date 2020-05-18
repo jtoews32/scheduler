@@ -11,8 +11,9 @@ import com.scheduler.modules.*;
 @Configuration
 public class BeanConfig {
 	private static final Logger log = LoggerFactory.getLogger(BeanConfig.class);
-   	@Autowired EventRepository eventRepository;
-   	@Bean public EventService eventService() { 
-   		return new EventServiceImpl(eventRepository); 
-   	};
+	@Autowired EventRepository eventRepository;
+	
+	@Bean public EventService eventService() { 
+		return new EventServiceImpl(eventRepository);
+	}
  }

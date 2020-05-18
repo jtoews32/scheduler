@@ -2,9 +2,7 @@
 
 A calendar application that allows users to add and remove appointments.
 
-The appointments 
-must be between 8AM and 5PM on weekdays.
-must be 15 minutes, or 1 hour in duration.
+The appointments slots are between 8AM and 5PM on weekdays. The slots are 15 minutes, or 1 hour in duration.
 
 # Scheduler checkout #
 ```
@@ -27,25 +25,24 @@ http://localhost:8080/
 # Making the DB persistant 
 
 H2 was used for demonstration of persistance and is configured to run in memory.
-To test it in persistance mode change
+To test in persistance mode change and also enable console
 
 scheduler/src/main/resources/application.properties
 ```
-;spring.datasource.url=jdbc:h2:file:~/demo;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
 ;spring.jpa.hibernate.ddl-auto = update
+;spring.h2.console.enabled=true
+;spring.h2.console.path=/h2-console
+;spring.h2.console.settings.trace=false
+;spring.h2.console.settings.web-allow-others=false
 ```
-to
-```
-spring.datasource.url=jdbc:h2:file:~/demo;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE;DB_CLOSE_DELAY=-1;
-spring.jpa.hibernate.ddl-auto = update
-```
-# DB URL 
+H2 Console URL
 ```
 http://localhost:8080/h2-console
 user: sa
 password: password
 ```
-# Information about the system this assignment was built on #
+
+# Environment settings on original build system #
 
 ## Java
 ```
