@@ -6,10 +6,13 @@ The appointments
 must be between 8AM and 5PM on weekdays.
 must be 15 minutes, or 1 hour in duration.
 
-
-
+# Scheduler checkout #
+```
+git clone https://github.com/jtoews32/scheduler.git
+```
 # Building scheduler #
 ```
+cd scheduler/
 ./gradlew clean build
 ```
 # Running schedular #
