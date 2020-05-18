@@ -41,10 +41,10 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
       return "15 minute or 1 hour appoints slots offered, " +  date.toLocaleString('en-us', options) ; 
     }
 
-    var showAppointments = function (calendar) {
+    var showAppointments = function(calendar) {
       axios.get('http://localhost:8080/events')
       .then(function (response) {
-        response.data.forEach( function(event) { 
+        response.data.forEach(function(event) { 
           calendar.addEvent({
             id: event.id,
             resourceId: 'resource', 
@@ -122,15 +122,15 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         $("#removeAppointmentModalButton").click();
       },
 
-      dateClick: function(arg) {
-        if(arg.view.type == 'dayGridMonth') {
+      dateClick: function(info) {
+        if(info.view.type == 'dayGridMonth') {
           return;
         }
   
         $("#eventNameInput").val('');
-        $("#scheduleTextBody").text(prettyTimeText(arg["date"]));
+        $("#scheduleTextBody").text(prettyTimeText(info["date"]));
         $("#eventNameInput").removeClass("alert alert-danger");
-        $("#bookAppointmentModalButton").data("start", getStartTime(arg["date"])); 
+        $("#bookAppointmentModalButton").data("start", getStartTime(info["date"])); 
         $("#bookAppointmentModalButton").click();
       }
     });
