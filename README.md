@@ -24,7 +24,7 @@ http://localhost:8080/
 ```
 # If something goes wrong. System requirements #
 ```
-Have internet access. Webpage can use Javascript libraries like Axios for example that are hosted.
+Have internet access. The webpage uses Javascript libraries like Axios, Bootstrap, and jQuery that are hosted.
 Java, and Gradle must be installed.
 For H2 database persistence between restarts "~/" must be writable so ~/demo can be written.
 See configuration below for in memory option.
