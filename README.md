@@ -1,4 +1,4 @@
-# scheduler
+# Appointment Calendar
 
 A calendar application that allows users to add and remove appointments.
 
