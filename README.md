@@ -4,35 +4,35 @@ A calendar application that allows users to add and remove appointments.
 
 The appointments slots are between 8AM and 5PM on weekdays. The slots are 15 minutes, or 1 hour in duration.
 
-# Scheduler checkout #
+# How to checkout #
 ```
 git clone https://github.com/jtoews32/scheduler.git
 ```
-# Building scheduler #
+# How to build #
 ```
 cd scheduler/
 ./gradlew clean build
 ```
-# Running schedular #
+# How to start #
 ```
 java -jar build/libs/scheduler-0.0.1-SNAPSHOT.jar
 ```
-# System requirements #
-```
-System must have internet access so webpage can use Java libs.
-Java, and Gradle must be installed.   
-For H2 database persistence between restarts "~/" must be writable so ~/demo can be written.
-See configuration below for in memory option.
-```
-# Viewing the scheduler demo #
+# How to view #
 ```
 http://localhost:8080/
 
 ```
-# Making the DB persistant 
+# If something goes wrong. System requirements #
+```
+System must have internet access so webpage can use Java libs.
+Java, and Gradle must be installed.
+For H2 database persistence between restarts "~/" must be writable so ~/demo can be written.
+See configuration below for in memory option.
+```
+# How to make  DB persistant 
 
-While typically an in memory database, H2 was for this applicatoin, and for testing and demo purposes was used in persistance mode.
-To switch between in memory and persistance mode change the below. Remove ";", or add ";".
+While typically an in-memory database, H2, can also be used in persistance mode.
+To switch between in-memory and persistance mode change the below. Remove ";", or add ";".
 
 scheduler/src/main/resources/application.properties
 ```
@@ -50,7 +50,10 @@ user: sa
 password: password
 ```
 
-# Environment settings on original build system #
+# Local environment settings of the original build system #
+
+If for some reason it won't work because of an extreme difference this app was created, and tested using Firefox
+on a Linux machine with the following the versions of software.
 
 ## Java
 ```
