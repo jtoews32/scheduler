@@ -25,7 +25,7 @@ http://localhost:8080/
 # Making the DB persistant 
 
 H2 was used for demonstration of persistance and is configured to run in memory.
-To test in persistance mode change and also enable console
+To test in persistance mode change the below. Remove ";".
 
 scheduler/src/main/resources/application.properties
 ```
