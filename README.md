@@ -21,7 +21,8 @@ java -jar build/libs/scheduler-0.0.1-SNAPSHOT.jar
 ```
 System must have internet access so webpage can use Java libs.
 Java, and Gradle must be installed.   
-For DB persistence between restarts "~/" must be writable so ~/demo can be written.
+For H2 database persistence between restarts "~/" must be writable so ~/demo can be written.
+See configuration below for in memory option.
 ```
 # Viewing the scheduler demo #
 ```
@@ -30,8 +31,8 @@ http://localhost:8080/
 ```
 # Making the DB persistant 
 
-H2 was used for demonstration of persistance and is configured to run in memory.
-To test in persistance mode change the below. Remove ";".
+While typically an in memory database, H2 was for this applicatoin, and for testing and demo purposes was used in persistance mode.
+To switch between in memory and persistance mode change the below. Remove ";", or add ";".
 
 scheduler/src/main/resources/application.properties
 ```

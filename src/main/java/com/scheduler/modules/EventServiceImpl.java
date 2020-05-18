@@ -35,7 +35,7 @@ public class EventServiceImpl implements EventService {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(eventDAO.getStart().getTime());
-        if( eventDAO.getDuration() == 15) {
+        if(eventDAO.getDuration() == 15) {
             calendar.add(Calendar.MINUTE, 15);
         } else {
             calendar.add(Calendar.MINUTE, 60);
@@ -50,8 +50,8 @@ public class EventServiceImpl implements EventService {
         calendar.setTimeInMillis(end.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        if( hour >= 17 && !( hour == 17 && minute ==0 ) ) {
-        return false;
+        if(hour >= 17 && !( hour == 17 && minute ==0)) {
+            return false;
         } 
         return true;
     }
@@ -62,8 +62,8 @@ public class EventServiceImpl implements EventService {
         calendar.setTimeInMillis(start.getTime());
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        if( hour  < 8) {
-        return false;
+        if(hour  < 8) {
+            return false;
         }
         return true;
     }

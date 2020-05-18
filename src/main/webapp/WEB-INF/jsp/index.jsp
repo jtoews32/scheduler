@@ -22,15 +22,15 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#bookAppointmentModal").hide();
-    $("#removeAppointmentModal").hide();
+    $("#bookAppointmentModalButton").hide();
+    $("#removeAppointmentModalButton").hide();
 
     var getStartTime = function(date) {
       return new Date(date.toString().split('GMT')[0]+' UTC').toISOString().replace(".000Z", "");
     }
 
     var prettyTimeText = function (date) {
-    let options = {
+      let options = {
         weekday: 'long',
         year: 'numeric',
         month: 'short',
@@ -38,7 +38,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         hour: '2-digit',
         minute: '2-digit'
       };
-      return "15 minute or 60 minute appoints offered, " +  date.toLocaleString('en-us', options) ; 
+      return "15 minute or 1 hour appoints slots offered, " +  date.toLocaleString('en-us', options) ; 
     }
 
     var showAppointments = function ( calendar ) {
@@ -54,10 +54,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
           });
         });
         calendar.render(); 
-      })
-      .catch(function (error) {
-
-      });   
+      });
     }
 
     var bookAppointment = function(calendar, startTime, name, duration) {
@@ -76,11 +73,8 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
           end: response.data.end.replace(".000+0000", ""),
           title: response.data.title,
         });
-
         calendar.render(); 
-      })
-      .catch(function (error) {
-      });   
+      }); 
     }
 
     var unbookAppointment = function(calendar, id) {
@@ -89,19 +83,17 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         var event = calendar.getEventById(id);
         event.remove();
         calendar.render(); 
-      })
-      .catch(function (error) {
-      });   
+      });
     }
 
     var calendarEl = document.getElementById('calendar');
     const calGMT = Date().toString().split('GMT')[0]+' UTC';
-    const caldefault = (new Date(calGMT).toISOString().split('T')[0]);
+    const calDefault = (new Date(calGMT).toISOString().split('T')[0]);
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       plugins: [ 'interaction', 'resourceDayGrid', 'resourceTimeGrid' ],
       defaultView: 'resourceTimeGridDay',
-      defaultDate: caldefault,
+      defaultDate: calDefault,
       slotDuration: '00:15:00',
       snapDuration: '00:15:00',
       allDaySlot: false,
@@ -121,62 +113,55 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         right: 'resourceTimeGridDay,timeGridWeek,dayGridMonth'  
       },
       views: {},
-      resources: [{ id: 'resource', title: ' ' },],
+      resources: [{id: 'resource', title: ' '},],
       events: [],
 
       eventClick: function(info) {
         $("#removeTextBody").text( "\"" + info.event.title + "\" will be removed from the calendar");
-        $("#removeAppointmentModal" ).data("id", info.event.id); 
-        $("#removeAppointmentModal" ).click();
+        $("#removeAppointmentModalButton").data("id", info.event.id); 
+        $("#removeAppointmentModalButton").click();
       },
 
-      dateClick: function(arg ) {
-        if ( arg.view.type == 'dayGridMonth') {
+      dateClick: function(arg) {
+        if(arg.view.type == 'dayGridMonth') {
           return;
         }
   
-        $("#nameTheEvent").val('');
-        $("#bodytext").text(prettyTimeText(arg["date"]));
-
-        $("#nameTheEvent" ).removeClass( "alert alert-danger" );
-
-        $("#bookAppointmentModal" ).data("start", getStartTime(arg["date"]) ); 
-        $("#bookAppointmentModal" ).click();
-
-        console.log('dateClick', arg.date, arg.resource ? arg.resource.id : '(no resource)');
+        $("#eventNameInput").val('');
+        $("#scheduleTextBody").text(prettyTimeText(arg["date"]));
+        $("#eventNameInput" ).removeClass("alert alert-danger");
+        $("#bookAppointmentModalButton").data("start", getStartTime(arg["date"])); 
+        $("#bookAppointmentModalButton").click();
       }
     });
 
     showAppointments(calendar);
     calendar.render();
 
-    $("#book15").on("click", function(){
-      if( $("#nameTheEvent").val().length === 0) {
-
-        $("#nameTheEvent").addClass( "alert alert-danger" );
+    $("#book15Button").on("click", function(){
+      if( $("#eventNameInput").val().length === 0) {
+        $("#eventNameInput").addClass("alert alert-danger");
         return;
       }
-      bookAppointment(calendar, $( "#bookAppointmentModal" ).data("start") , $( "#nameTheEvent").val(), 15);
-      $("#close").click();
+      bookAppointment(calendar, $("#bookAppointmentModalButton" ).data("start") , $("#eventNameInput").val(), 15);
+      $("#closeScheduleModalButton").click();
     });
 
-    $("#book60").on("click", function(){
-      if($("#nameTheEvent").val().length === 0) {
-        $("#nameTheEvent").addClass( "alert alert-danger" );
+    $("#book60Button").on("click", function(){
+      if($("#eventNameInput").val().length === 0) {
+        $("#eventNameInput").addClass( "alert alert-danger" );
         return;
       }
 
-      bookAppointment(calendar, $( "#bookAppointmentModal" ).data("start") , $( "#nameTheEvent").val(), 60);
-      $("#close").click();
+      bookAppointment(calendar,$("#bookAppointmentModalButton").data("start") , $("#eventNameInput").val(), 60);
+      $("#closeScheduleModalButton").click();
     });
 
-    $("#remove").on("click", function(){
-      unbookAppointment( calendar,  $( "#removeAppointmentModal" ).data("id")   );
-      $("#closeDelete").click();
+    $("#removeAppointmentButton").on("click", function(){
+      unbookAppointment( calendar,$( "#removeAppointmentModalButton").data("id"));
+      $("#closeDeleteModalButton").click();
     });
-
   });
-
 </script>
 <style>
   body {
@@ -193,62 +178,52 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 </head>
 <body class="bg-transparent">
   <div id='calendar'></div>
- 
   <div id="scheduleModal"  class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Book appointment</h5>
+          <h5 class="modal-title">Book appointment slot</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body" >
-          <p id="bodytext">15 minute and 60 minute appointments are offered.</p>
-          
+          <p id="scheduleTextBody">15 minute and 1 hour appointments are offered.</p>
           <form>
             <div class="form-group">
-              <label for="nameTheEvent">Name the event</label>
-              <input id="nameTheEvent" class="form-control form-control-sm " type="text" placeholder="">
+              <label for="eventNameInput">Name the event</label>
+              <input id="eventNameInput" class="form-control form-control-sm " type="text" placeholder="">
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button id="book15" type="button" class="btn btn-primary">Book 15 minutes</button>
-          <button id="book60" type="button" class="btn btn-primary">Book 60 minutes</button>
-          <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button id="book15Button" type="button" class="btn btn-primary">Book 15 minutes</button>
+          <button id="book60Button" type="button" class="btn btn-primary">Book 1 hour</button>
+          <button id="closeScheduleModalButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-
- 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div id="removeTextBody" class="modal-body">
-        Delete this event from the calendar 
-      </div>
-      <div class="modal-footer">
-
-        <button id="remove"  type="button" class="btn btn-primary">Yes</button>
-        <button id="closeDelete" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-        
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="removeTextBody" class="modal-body">
+          Delete this appointment slot from the calendar 
+        </div>
+        <div class="modal-footer">
+          <button id="removeAppointmentButton" type="button" class="btn btn-primary">Yes</button>
+          <button id="closeDeleteModalButton" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<button id="removeAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModal">button</button>
-
-<button id="bookAppointmentModal" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#scheduleModal" data-whatever="@mdo">button</button>
-
+  <button id="removeAppointmentModalButton" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#deleteModal">button</button>
+  <button id="bookAppointmentModalButton" class="display: none; visibility: hidden; btn btn-primary" type="button" data-toggle="modal" data-target="#scheduleModal" data-whatever="@mdo">button</button>
 </body>
 </html>

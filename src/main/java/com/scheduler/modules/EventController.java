@@ -25,8 +25,8 @@ public class EventController {
     @ResponseBody
     public EventDAO newEvent(@RequestBody EventDAO newEventDAO) {
         EventDAO eventDAO = eventService.setEndTime(newEventDAO);
-        if ( !eventService.hasTimeOverlap(eventDAO) && eventService.isEndTimeValid(eventDAO.getEnd() ) && eventService.isStartTimeValid(eventDAO.getStart()) ) {
-          return eventService.create(eventDAO);
+        if ( !eventService.hasTimeOverlap(eventDAO) && eventService.isEndTimeValid(eventDAO.getEnd()) && eventService.isStartTimeValid(eventDAO.getStart())) {
+            return eventService.create(eventDAO);
         } 
         return null;
     }

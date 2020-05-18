@@ -11,7 +11,7 @@ public class SchedularApplication {
     private static final Logger log = LoggerFactory.getLogger(SchedularApplication.class);
 
     public static void main(String[] args) {
-    SpringApplication.run(SchedularApplication.class, args);
+        SpringApplication.run(SchedularApplication.class, args);
     }
 }
 
