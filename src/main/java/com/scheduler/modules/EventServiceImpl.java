@@ -6,17 +6,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.*;
 
-/*
-import java.util.*;
-import java.lang.*;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
-import org.springframework.http.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
-import java.math.BigDecimal;*/
 
 public class EventServiceImpl implements EventService {
 	private EventRepository eventRepository;

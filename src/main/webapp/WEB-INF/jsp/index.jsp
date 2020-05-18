@@ -212,14 +212,8 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
 
 </style>
 
-
 </head>
 <body class="bg-transparent">
-
-  <div align="middle">
-    <h2 class="hello-title">Hello ${name}! Access scheduler</h2>
-  </div>
-
   <div id='calendar'></div>
  
   <div id="scheduleModal"  class="modal" tabindex="-1" role="dialog">
@@ -262,7 +256,7 @@ sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossor
         </button>
       </div>
       <div id="removeTextBody" class="modal-body">
-Delete this event from the calendar 
+        Delete this event from the calendar 
       </div>
       <div class="modal-footer">
 

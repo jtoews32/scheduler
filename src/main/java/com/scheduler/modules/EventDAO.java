@@ -1,11 +1,5 @@
 package com.scheduler.modules;
 
-/*
- events: [
-    { id: '1', resourceId: 'a', start: '2020-02-06', end: '2020-02-08', title: 'event 1' },
-    { id: '2', resourceId: 'a', start: '2020-02-07T09:00:00', end: '2020-02-07T14:00:00', title: 'event 2' },
-  ],
-*/
 import javax.persistence.*; 
 import java.sql.Timestamp;
 
